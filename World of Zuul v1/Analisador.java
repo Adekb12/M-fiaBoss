@@ -63,4 +63,8 @@ public class Analisador
             return new Comando(null, palavra2); 
         }
     }
+
+    public String getPalavrasComando(){
+        return palavrasDeComando.getPalavrasComando();
+    }
 }
