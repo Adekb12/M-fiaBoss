@@ -62,6 +62,7 @@ public class Analisador
         else {
             return new Comando(null, palavra2); 
         }
+        
     }
 
     public String getPalavrasComando(){

@@ -16,8 +16,9 @@
 import java.util.HashMap;
 public class Ambiente 
 {
-    public String descricao;
+    private String descricao;
     private HashMap<String, Ambiente> saidas;
+    private Inimigo inimigo;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -41,6 +42,8 @@ public class Ambiente
      * @param leste A saida leste.
      * @param sul A saida sul.
      * @param oeste A saida oeste.
+     * @param noroeste
+     * @param sudestes
      */
     public void ajustarSaidas(String direcao, Ambiente ambiente) 
     {
