@@ -6,7 +6,14 @@ public class Inimigo {
         this.pontosDeVida = pontosDeVida;
         this.item = item;
     }
-    
+
+    public int getPontosDeVida() {
+        return pontosDeVida;
+    }
+
+    private Item getItem() {
+        return item;
+    }
     
 }
 

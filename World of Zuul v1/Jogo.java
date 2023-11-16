@@ -165,9 +165,9 @@ public class Jogo {
      */
     private void imprimirBoasVindas() {
         System.out.println();
-        System.out.println("Bem-vindo ao World of Zuul!");
-        System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
-        System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
+        System.out.println("Nesse jogo, você é um agente secreto contratado pelo federal da Itália.");
+        System.out.println("Para acabar com a máfia Yakult, liberado por Chamyto.");
+        System.out.println("O agente deve enfrentar os capangas da máfia até chegar ao seu líder, para derrotá-lo.");
         System.out.println();
 
         imprimirLocalizacaoAtual();
@@ -221,7 +221,7 @@ public class Jogo {
      */
     private void imprimirAjuda() {
         System.out.println("Voce esta perdido. Voce esta sozinho. Voce caminha");
-        System.out.println("pela universidade.");
+        System.out.println("pelos cômodos da base máfia.");
         System.out.println();
         System.out.println("Suas palavras de comando sao:");
         System.out.println(analisador.getPalavrasComando());
