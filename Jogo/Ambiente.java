@@ -16,9 +16,11 @@
 import java.util.HashMap;
 public class Ambiente 
 {
+    private int idAmbiente;
     private String descricao;
     private HashMap<String, Ambiente> saidas;
-    private Inimigo inimigo;
+    private Personagem inimigo;
+    private Item item;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -29,12 +31,28 @@ public class Ambiente
      * "um jardim aberto".
      * @param descricao A descricao do ambiente.
      */
-    public Ambiente(String descricao) 
+    public Ambiente(String descricao, int idAmbiente) 
     {
         this.descricao = descricao;
-        saidas = new HashMap<String, Ambiente>();
+        this.idAmbiente = idAmbiente;
+        saidas = new HashMap<String, Ambiente>();  
     }
 
+    public void setInimigo(Personagem inimigo){
+        this.inimigo = inimigo;
+    }
+
+    public void setItem(Item item){
+        this.item = item;
+    }
+
+    public Personagem getInimigo(){
+        return inimigo;
+    }
+
+    public Item getItem(){
+        return item;
+    }
     /**
      * Define as saidas do ambiente. Cada direcao ou leva a um
      * outro ambiente ou eh null (nenhuma saida para la).
@@ -69,5 +87,6 @@ public class Ambiente
         }
         return textoSaidas;
     }
+
 
 }

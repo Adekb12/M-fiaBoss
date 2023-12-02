@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Essa eh a classe principal da aplicacao "World of Zull".
  * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.
@@ -18,36 +21,39 @@
 public class Jogo {
     private Analisador analisador;
     private Ambiente ambienteAtual;
+    private ArrayList<Personagem> inimigos;
+    private Agente hero;
 
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
     public Jogo() {
         criarAmbientes();
+        criarInimigos();
         analisador = new Analisador();
     }
 
     /**
      * Cria todos os ambientes e liga as saidas deles
      */
+
     private void criarAmbientes() {
         Ambiente fora, corredor, adega, dormitorio, banheiro2, salaJogos, banheiro1, armazem, salaReunioes, salaArmas, garagem, refeitorio, salaTreinamento;
 
         // cria os ambientes
-        fora = new Ambiente("fora da base da mafia");
-        corredor = new Ambiente("no corredor da base da mafia");
-        adega = new Ambiente("no adega");
-        dormitorio = new Ambiente("no dormitorio");
-        banheiro2 = new Ambiente("no banheiro");
-        salaJogos = new Ambiente("na sala de jogos");
-        banheiro1 = new Ambiente("no banheiro");
-        armazem = new Ambiente("no armazem");
-        salaReunioes = new Ambiente("na sala de reunioes");
-        salaArmas = new Ambiente ("na sala de armas");
-        garagem = new Ambiente ("na sala de armas");
-        refeitorio = new Ambiente ("no refeitorio");
-        salaTreinamento = new Ambiente ("na sala de treinamento");
-
+        fora = new Ambiente("fora da base da mafia", -1);
+        corredor = new Ambiente("no corredor da base da mafia", 0);
+        adega = new Ambiente("no adega", 1);
+        dormitorio = new Ambiente("no dormitorio", 2);
+        banheiro2 = new Ambiente("no banheiro",3);
+        salaJogos = new Ambiente("na sala de jogos", 4);
+        banheiro1 = new Ambiente("no banheiro", 5);
+        armazem = new Ambiente("no armazem",6);
+        salaReunioes = new Ambiente("na sala de reunioes", 7);
+        salaArmas = new Ambiente ("na sala de armas", 8);
+        garagem = new Ambiente ("na sala de armas", 9);
+        refeitorio = new Ambiente ("no refeitorio", 10);
+        salaTreinamento = new Ambiente ("na sala de treinamento", 11);
 
         corredor.ajustarSaidas("norte", salaJogos);
         corredor.ajustarSaidas("leste", dormitorio);
@@ -142,6 +148,38 @@ public class Jogo {
       
         ambienteAtual = fora; // o jogo comeca do lado de fora
     }
+    
+    private void criarInimigos(){
+        Personagem inimigo1 = new Capanga(50, new Arma("FUZIL", 20));
+        Personagem inimigo2 = new Capanga(50, new Arma("PONTO 50", 20));
+        Personagem inimigo3 = new Capanga(50, new Arma("FAZ O L", 20));
+        Personagem inimigo4 = new Capanga(50, new Arma("FACA", 5));
+        Personagem inimigo5 = new Capanga(50, new Arma("FLOR", 5000));
+        Personagem chefe = new Chefe(5000, new Arma("MACHINE GUN", 200));
+
+        inimigos.add(inimigo1);
+        inimigos.add(inimigo2);
+        inimigos.add(inimigo3);
+        inimigos.add(inimigo4);
+        inimigos.add(inimigo5);
+        inimigos.add(chefe);
+
+        randomizarInimigos();
+
+    }
+
+    private void randomizarInimigos() {
+        Random random = new Random();
+        int num;
+        for(int i = 0; i < 5; i++) {
+            num = random.nextInt(ListadeAMBientes.sizeeeeeeeeeee());
+        }
+        for(Personagem p: inimigos){
+            if(num == 10) {
+                salaReunioes.inimigo = inimigo1;
+            }
+        }
+    }
 
     /**
      * Rotina principal do jogo. Fica em loop ate terminar o jogo.
@@ -203,6 +241,10 @@ public class Jogo {
             querSair = sair(comando);
         } else if (palavraDeComando.equals("observar")) {
             observar(comando);
+        } else if (palavraDeComando.equals("atirar")) {
+            atirar(comando);
+        } else if (palavraDeComando.equals("fugir")) {
+
         }
 
         return querSair;
@@ -264,6 +306,14 @@ public class Jogo {
             return false;
         } else {
             return true; // sinaliza que nos queremos sair
+        }
+    }
+
+    private void atirar(Comando comando) {
+        if(!inimigo.ambiente()){
+            // QUER ATIRAR AONDE SEU LOUCO?
+        }else{
+            
         }
     }
 }

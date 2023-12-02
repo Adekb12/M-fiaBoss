@@ -1,10 +1,10 @@
 import java.util.Random;
 
-public class Chefe extends Inimigo{
+public class Chefe extends Personagem{
     private double chanceDeDormir;
 
-    public Chefe(int pontosDeVida, Item item) {
-        super(pontosDeVida, item);
+    public Chefe(int pontosDeVida, Arma arma) {
+        super(pontosDeVida, arma);
         this.chanceDeDormir = calcularChanceDeDormir();
     }
 

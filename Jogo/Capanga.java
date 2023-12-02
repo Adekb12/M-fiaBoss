@@ -1,10 +1,10 @@
 import java.util.Random;
 
-public class Capanga extends Inimigo{
+public class Capanga extends Personagem{
     private int nivelDeConfianca;
 
-    public Capanga(int pontosDeVida, Item item){
-        super(pontosDeVida, item);
+    public Capanga(int pontosDeVida, Arma arma){
+        super(pontosDeVida, arma);
         this.nivelDeConfianca = calcularNivelDeConfianca();
     }
 
