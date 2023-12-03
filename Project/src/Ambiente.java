@@ -11,8 +11,7 @@
  * guarda uma referencia para o ambiente vizinho, ou null se nao ha
  * saida naquela direcao.
  * 
- * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
- * @version 2011.07.31 (2016.02.01)
+ * @author Bruno firmino, Gabriel Furtado, luiz Victor Soriano, Mardem Arantes.
  */
 import java.util.HashMap;
 
@@ -87,11 +86,18 @@ public class Ambiente {
     public String getDescricao() {
         return descricao;
     }
-
+/**
+ * Método que retorna a saída baseado na direção passada no parâmetro.
+ * @param direcao
+ * @return Ambiente - saída específica
+ */
     public Ambiente getAmbiente(String direcao) {
         return saidas.get(direcao);
     }
-
+/**
+ * Método que irá retornar a mensagem com as saídas disponíveis.
+ * @return String - mensagem com a concatenação das saídas.
+ */
     public String direcoesDeSaida() {
         String textoSaidas = "| ";
         for (String direcao : saidas.keySet()) {

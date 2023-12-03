@@ -305,7 +305,7 @@ public class Jogo {
         if (!terminado) {
             return processado;
         }
-        return "Obrigado por jogar";
+        return "Obrigado por jogar. Digite sair para finalizar";
     }
 
     /**
@@ -527,6 +527,9 @@ public class Jogo {
                 + "Você recebeu um aumento na vida\n";
     }
 
+    /**
+     * Método responsável por gravar o histórico do jogo jogado em um um arquivo de texto.
+     */
     public void gravarLog() {
         try (FileWriter log = new FileWriter("LogJogo.txt")) {
             log.write(logJogo);

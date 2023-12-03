@@ -3,6 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Classe responsável por fazer a interface do jogo Mafia Boss, sendo uma
+ * subclasse da classe Jogo, por motivo do jogo conter a interface.
+ * 
+ * @author Bruno Henrique Firmino e Gabriel Furtado.
+ */
 public class Interface extends Jogo implements ActionListener {
     private JFrame janela;
     private ImageIcon planta;
@@ -21,8 +27,8 @@ public class Interface extends Jogo implements ActionListener {
 
     public Interface() {
         super();
-        planta = new ImageIcon("./Imagens/plantaBaseMafia.jpg");
-        janela = new JFrame("Mafia Boss");//
+        planta = new ImageIcon("../imagens/plantaBaseMafia.jpg");
+        janela = new JFrame("Mafia Boss");
         painelCentral = new JPanel();
         painelInferior = new JPanel();
         painelRespostas = new JTextArea(30, 100);
@@ -36,6 +42,9 @@ public class Interface extends Jogo implements ActionListener {
         tela = "";
     }
 
+    /**
+     * Método responsável por configurar a janela presente na interface.
+     */
     private void criarJanela() {
         janela.setSize(1300, 700);// redimensiona a tela
         janela.setLayout(new BorderLayout());// define o layout da janela
@@ -48,6 +57,9 @@ public class Interface extends Jogo implements ActionListener {
 
     }
 
+    /**
+     * Método responsável por configurar o campo superior da janela.
+     */
     private void campoSuperior() {
         painelCentral.setPreferredSize(new Dimension(planta.getIconWidth(), planta.getIconHeight()));
         painelCentral.setBorder(BorderFactory.createTitledBorder("Planta da Base"));
@@ -58,8 +70,10 @@ public class Interface extends Jogo implements ActionListener {
 
     }
 
+    /**
+     * Método responsável por configurar o campo inferior da janela.
+     */
     private void campoInferior() {
-
         painelInferior.setLayout(new BoxLayout(painelInferior, BoxLayout.Y_AXIS));// organiza os elementos pelo eixo y
         painelInferior.setPreferredSize(new Dimension(1000, 150));
         painelInferior.setBorder(BorderFactory.createTitledBorder("Campo de dados"));
@@ -70,8 +84,12 @@ public class Interface extends Jogo implements ActionListener {
         janela.add(painelInferior, BorderLayout.SOUTH);
     }
 
+    /**
+     * Método responsável por mostrar as mensagens necessárias para o usuário.
+     * 
+     * @param painelPertecente
+     */
     private void montarCampoResposta(JPanel painelPertecente) {
-        // subpainel que envia as mensagens para o jogador
         painelRespostas.setPreferredSize(new Dimension(600, 100));
         painelRespostas.setEditable(false);
 
@@ -79,8 +97,12 @@ public class Interface extends Jogo implements ActionListener {
         painelPertecente.add(scrollPane);
     }
 
+    /**
+     * Método responsável por capturar os dados digitados pelo usuário.
+     * 
+     * @param painelPertencente
+     */
     private void montarCampoEntradaDados(JPanel painelPertencente) {
-
         painelComando.setPreferredSize(new Dimension(850, 50));
         campoEntradaDados = new JTextField();// cria um campo de texto
         campoEntradaDados.setPreferredSize(new Dimension(600, 30));
@@ -91,6 +113,9 @@ public class Interface extends Jogo implements ActionListener {
 
     }
 
+    /**
+     * Método por criar os campos que vão o status do agente.
+     */
     private void montarCampoPersonagem() {
         painelPersonagem.setPreferredSize(new Dimension(200, 500));
         painelPersonagem.setBorder(BorderFactory.createTitledBorder("Status"));
@@ -101,46 +126,60 @@ public class Interface extends Jogo implements ActionListener {
         janela.add(painelPersonagem, BorderLayout.EAST);
     }
 
+    /**
+     * Método que vai mostrar o poder do agente.
+     * 
+     * @param painelPertencente
+     */
     private void montarPoder(JPanel painelPertencente) {
         campoPoder.setEditable(false);
         campoPoder.setText("Poder:");
         painelPertencente.add(campoPoder);
     }
 
+    /**
+     * Método que vai mostrar a vida do agente.
+     * 
+     * @param painelPertencente
+     */
     private void montarVida(JPanel painelPertencente) {
         campoVida.setEditable(false);
         campoVida.setText("Vida:");
         painelPertencente.add(campoVida);
     }
 
+    /**
+     * Método que vai mostrar a quantidade de inimigos derrotados.
+     * 
+     * @param painelPertencente
+     */
     private void montarInimigo(JPanel painelPertencente) {
         campoInimigos.setEditable(false);
         campoInimigos.setText("Inimigos Derrotados:");
         painelPertencente.add(campoInimigos);
     }
 
+    /**
+     * Método que irá mostrar a mensagem inicial do jogo na tela.
+     */
     public void exibir() {
         janela.setVisible(true);
         exibirMensagem(imprimirBoasVindas() + imprimirLocalizacaoAtual() + imprimirSaidas());
     }
 
+    /**
+     * Método que irá exibir todas as mensagens presentes no jogo.
+     * 
+     * @param mensagem mensagens presentes no jogo.
+     */
     public void exibirMensagem(String mensagem) {
-
-        if (mensagem.equals("Obrigado por jogar")) {
-            painelRespostas.setText(mensagem);
-            gravarLog();
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            janela.dispose();
-        } else {
-            tela += mensagem;
-            painelRespostas.setText(tela);
-        }
+        tela += mensagem;
+        painelRespostas.setText(tela);
     }
 
+    /**
+     * Método que irá faz com que os dados sejam executados após o clicar do botão.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = campoEntradaDados.getText();
@@ -153,11 +192,20 @@ public class Interface extends Jogo implements ActionListener {
         executar(comando);
     }
 
+    /**
+     * Método que vai tratar os comandos digitados na tela.
+     * 
+     * @param comando
+     */
     private void executar(String comando) {
         exibirMensagem(jogar(comando));
         atualizarStatus();
     }
 
+    /**
+     * Método que vai atualizar os campos de status do agente e a quantidade de
+     * inimigos derrotados.
+     */
     private void atualizarStatus() {
         int vida = pegarVidaAgente();
         int poder = pegarPoderAgente();
