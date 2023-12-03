@@ -1,19 +1,19 @@
 import java.util.Random;
 
 public class Chefe extends Personagem{
-    private double chanceDeDormir;
+    private double sorte;
 
     public Chefe(int pontosDeVida, Arma arma) {
         super(pontosDeVida, arma);
-        this.chanceDeDormir = calcularChanceDeDormir();
+        this.sorte = calcularSorte();
     }
 
-    private double calcularChanceDeDormir() {
+    private double calcularSorte() {
         Random random = new Random();
         return random.nextDouble();
     }
 
-    public double getChanceDeDormir() {
-        return chanceDeDormir;
+    public double getSorte() {
+        return sorte;
     }
 }

@@ -16,11 +16,11 @@
 import java.util.HashMap;
 public class Ambiente 
 {
-    private int idAmbiente;
+    private String nome;
     private String descricao;
     private HashMap<String, Ambiente> saidas;
     private Personagem inimigo;
-    private Item item;
+    private Item colete;
 
     /**
      * Cria um ambiente com a "descricao" passada. Inicialmente, ele
@@ -31,27 +31,40 @@ public class Ambiente
      * "um jardim aberto".
      * @param descricao A descricao do ambiente.
      */
-    public Ambiente(String descricao, int idAmbiente) 
+    public Ambiente(String nome, String descricao) 
     {
+        this.nome = nome;
         this.descricao = descricao;
-        this.idAmbiente = idAmbiente;
-        saidas = new HashMap<String, Ambiente>();  
+        saidas = new HashMap<String, Ambiente>(); 
+        inimigo = null; 
+        colete = null;
+    }
+
+    public String getNome(){
+        return nome;
     }
 
     public void setInimigo(Personagem inimigo){
         this.inimigo = inimigo;
     }
 
-    public void setItem(Item item){
-        this.item = item;
+    public void setColete(Item colete){
+        this.colete = colete;
     }
-
     public Personagem getInimigo(){
         return inimigo;
     }
 
-    public Item getItem(){
-        return item;
+    public Item getColete(){
+        return colete;
+    }
+
+    public void removerInimigo(){
+        inimigo = null;
+    }
+
+    public void removerColete(){
+        colete = null;
     }
     /**
      * Define as saidas do ambiente. Cada direcao ou leva a um
@@ -81,9 +94,10 @@ public class Ambiente
     }
 
     public String direcoesDeSaida() {
-        String textoSaidas = "";
+        String textoSaidas = "| ";
         for (String direcao : saidas.keySet()) {
-            textoSaidas = textoSaidas + direcao + " ";
+            if(getAmbiente(direcao) != null)
+                textoSaidas = textoSaidas + getAmbiente(direcao).getNome() + " | ";
         }
         return textoSaidas;
     }

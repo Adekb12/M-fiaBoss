@@ -1,12 +1,12 @@
-public class ObjetoProtetor extends  Item{
-    private int pontosDeVida;
+public class Colete extends Item{
+    private int bonusVida;
 
-    public ObjetoProtetor(String nome, int pontosDeVida){
+    public Colete(String nome, int bonusVida){
         super(nome);
-        this.pontosDeVida = pontosDeVida;
+        this.bonusVida = bonusVida;
     }
 
-    public int getPontosDeVida(){
-        return pontosDeVida;
+    public int getBonusVida(){
+        return bonusVida;
     }
-}int PopontosDeVida        super()nome/;strthis.pontosDeVida = pontosDeVida;
+}

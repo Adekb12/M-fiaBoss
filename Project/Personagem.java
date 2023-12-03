@@ -19,8 +19,12 @@ public class Personagem {
         pontosDeVida = pontosDeVida - dano;
     }
 
-    public int calculaDano(Arma arma) {
+    public int calculaPoder() {
         return arma.getPoder();
+    }
+
+    public void receberBonusVida(int bonusVida){
+        pontosDeVida += bonusVida;
     }
     
 }

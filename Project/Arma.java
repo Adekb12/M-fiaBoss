@@ -9,4 +9,8 @@ public class Arma extends Item{
     public int getPoder(){
         return poder;
     }
+    public int setPoder(int dano){
+        poder += dano;
+        return poder;
+    }
 }
