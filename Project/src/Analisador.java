@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 /**
- * Esta classe eh parte da aplicacao "World of Zuul".
- * "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.  
+ * Esta classe eh parte da aplicacao "Mafia Boss".
+ * "Mafia Boss" eh um jogo de ação simples, baseado em texto.  
  * 
  * Esse analisador le a entrada do usuario e tenta interpreta-la como um
  * comando "Adventure". Cada vez que eh chamado ele le uma linha do terminal
@@ -19,8 +19,7 @@ import java.util.Scanner;
  */
 public class Analisador 
 {
-    private PalavrasComando palavrasDeComando;  // guarda todas as palavras de comando validas
-    private Scanner entrada;         // origem da entrada de comandos
+    private PalavrasComando palavrasDeComando;  // guarda todas as palavras de comando validas     // origem da entrada de comandos
 
     /**
      * Cria um analisador para ler do terminal.
@@ -28,21 +27,16 @@ public class Analisador
     public Analisador() 
     {
         palavrasDeComando = new PalavrasComando();
-        entrada = new Scanner(System.in);
     }
 
     /**
      * @return O proximo comando do usuario
      */
-    public Comando pegarComando() 
+    public Comando pegarComando(String entrada) 
     {
-        String linha;   // guardara uma linha inteira
+        String linha = entrada;   // guardara uma linha inteira
         String palavra1 = null;
         String palavra2 = null;
-
-        System.out.print("> ");     // imprime o prompt
-
-        linha = entrada.nextLine();
 
         // Tenta encontrar ate duas palavras na linha
         Scanner tokenizer = new Scanner(linha);

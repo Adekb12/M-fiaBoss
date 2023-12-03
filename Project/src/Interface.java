@@ -1,36 +1,37 @@
-// feito por Bruno
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Interface implements ActionListener {
+public class Interface extends Jogo implements ActionListener {
     private JFrame janela;
-    private ImageIcon mapa;
-    private JLabel exibirMapa;
-    private JTextField campoEntradaDados; // para conseguir entrar com os comandos
+    private ImageIcon planta;
+    private JLabel exibirPlanta;
+    private JTextField campoEntradaDados;
     private String tela;
-    private JPanel painelSuperior;
+    private JPanel painelCentral;
     private JPanel painelInferior;
-    private JTextField painelRespostas;
+    private JTextArea painelRespostas;
     private JPanel painelComando;
     private JPanel painelPersonagem;
     private JButton enviar;
     private JTextField campoVida;
     private JTextField campoPoder;
+    private JTextField campoInimigos;
 
     public Interface() {
-        mapa = new ImageIcon("/home/bruno/Documents/mapaRosa.jpg");// pega o caminho do arquivo de imagem
-        janela = new JFrame("Mapa");// aparece mapa no topo da tela
-        painelSuperior = new JPanel();
+        super();
+        planta = new ImageIcon("./Imagens/plantaBaseMafia.jpg");
+        janela = new JFrame("Mafia Boss");//
+        painelCentral = new JPanel();
         painelInferior = new JPanel();
-        painelRespostas = new JTextField();
+        painelRespostas = new JTextArea(30, 100);
         painelComando = new JPanel();
         painelPersonagem = new JPanel();
         enviar = new JButton("Enviar resposta");
         campoVida = new JTextField();
         campoPoder = new JTextField();
-
+        campoInimigos = new JTextField();
         criarJanela();
         tela = "";
     }
@@ -48,12 +49,12 @@ public class Interface implements ActionListener {
     }
 
     private void campoSuperior() {
-        painelSuperior.setPreferredSize(new Dimension(mapa.getIconWidth(), mapa.getIconHeight()));
-        painelSuperior.setBorder(BorderFactory.createTitledBorder("Planta da casa dos mafiosos"));
-        exibirMapa = new JLabel(mapa);// adiciona em uma label
-        painelSuperior.add(exibirMapa);// adiciona na janela na posicao norte
+        painelCentral.setPreferredSize(new Dimension(planta.getIconWidth(), planta.getIconHeight()));
+        painelCentral.setBorder(BorderFactory.createTitledBorder("Planta da Base"));
+        exibirPlanta = new JLabel(planta);// adiciona em uma label
+        painelCentral.add(exibirPlanta);// adiciona na janela na posicao norte
 
-        janela.add(painelSuperior, BorderLayout.NORTH);
+        janela.add(painelCentral, BorderLayout.CENTER);
 
     }
 
@@ -74,19 +75,17 @@ public class Interface implements ActionListener {
         painelRespostas.setPreferredSize(new Dimension(600, 100));
         painelRespostas.setEditable(false);
 
-        painelPertecente.add(painelRespostas);
+        JScrollPane scrollPane = new JScrollPane(painelRespostas);
+        painelPertecente.add(scrollPane);
     }
 
     private void montarCampoEntradaDados(JPanel painelPertencente) {
 
         painelComando.setPreferredSize(new Dimension(850, 50));
-
         campoEntradaDados = new JTextField();// cria um campo de texto
         campoEntradaDados.setPreferredSize(new Dimension(600, 30));
-
         painelComando.add(campoEntradaDados);
         painelComando.add(enviar);
-
         painelPertencente.add(painelComando);
         enviar.addActionListener(this);
 
@@ -96,47 +95,76 @@ public class Interface implements ActionListener {
         painelPersonagem.setPreferredSize(new Dimension(200, 500));
         painelPersonagem.setBorder(BorderFactory.createTitledBorder("Status"));
         painelPersonagem.setLayout(new BoxLayout(painelPersonagem, BoxLayout.Y_AXIS));
-        campoPoder.setEditable(false);
-        campoVida.setEditable(false);
-        painelPersonagem.add(campoVida);
-        painelPersonagem.add(campoPoder);
+        montarPoder(painelPersonagem);
+        montarVida(painelPersonagem);
+        montarInimigo(painelPersonagem);
         janela.add(painelPersonagem, BorderLayout.EAST);
+    }
+
+    private void montarPoder(JPanel painelPertencente) {
+        campoPoder.setEditable(false);
+        campoPoder.setText("Poder:");
+        painelPertencente.add(campoPoder);
+    }
+
+    private void montarVida(JPanel painelPertencente) {
+        campoVida.setEditable(false);
+        campoVida.setText("Vida:");
+        painelPertencente.add(campoVida);
+    }
+
+    private void montarInimigo(JPanel painelPertencente) {
+        campoInimigos.setEditable(false);
+        campoInimigos.setText("Inimigos Derrotados:");
+        painelPertencente.add(campoInimigos);
+    }
+
+    public void exibir() {
+        janela.setVisible(true);
+        exibirMensagem(imprimirBoasVindas() + imprimirLocalizacaoAtual() + imprimirSaidas());
+    }
+
+    public void exibirMensagem(String mensagem) {
+
+        if (mensagem.equals("Obrigado por jogar")) {
+            painelRespostas.setText(mensagem);
+            gravarLog();
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            janela.dispose();
+        } else {
+            tela += mensagem;
+            painelRespostas.setText(tela);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = campoEntradaDados.getText();
         campoEntradaDados.setText("");
-        tela = " ";
+        tela = "";
+        if (comando.equals("sair")) {
+            gravarLog();
+            janela.dispose();// fecha a janela
+        }
         executar(comando);
     }
 
     private void executar(String comando) {
-        int vida = 10;
-        int poder = 10;
-        if (comando.equals("Irnorte ")) {
-            tela += "Voce esta no a, deseja ir para o lado b ou continuar no a";
-            painelRespostas.setText(tela);
-        } else if (comando.equals("b")) {
-            tela += "Voce esta no lado b, deseja ir para o lado a ou continuar no b";
-            painelRespostas.setText(tela);
-        } else {
-            tela += "comando invalido, entre com um comando valido";
-            painelRespostas.setText(tela);
-        }
+        exibirMensagem(jogar(comando));
+        atualizarStatus();
+    }
+
+    private void atualizarStatus() {
+        int vida = pegarVidaAgente();
+        int poder = pegarPoderAgente();
+        int inimigos = pegarInimigosDerrotados();
         campoVida.setText("Vida:" + vida);
         campoPoder.setText("Poder:" + poder);
+        campoInimigos.setText("Inimigos Derrotados: " + inimigos);
     }
 
-    public void exibir() {
-        janela.setVisible(true);
-    }
-
-    public static void main(String[] args) throws Exception {
-        Interface i = new Interface();
-        i.exibir();
-
-    }
 }
-
-
