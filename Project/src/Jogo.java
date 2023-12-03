@@ -531,7 +531,7 @@ public class Jogo {
      * Método responsável por gravar o histórico do jogo jogado em um um arquivo de texto.
      */
     public void gravarLog() {
-        try (FileWriter log = new FileWriter("LogJogo.txt")) {
+        try (FileWriter log = new FileWriter("LogJogo.txt", false)) {
             log.write(logJogo);
         } catch (IOException e) {
             System.out.println(e);

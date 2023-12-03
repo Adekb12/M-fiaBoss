@@ -27,7 +27,7 @@ public class Interface extends Jogo implements ActionListener {
 
     public Interface() {
         super();
-        planta = new ImageIcon("../imagens/plantaBaseMafia.jpg");
+        planta = new ImageIcon("Project/imagens/plantaBaseMafia.jpg");
         janela = new JFrame("Mafia Boss");
         painelCentral = new JPanel();
         painelInferior = new JPanel();
