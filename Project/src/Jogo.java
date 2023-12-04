@@ -225,7 +225,7 @@ public class Jogo {
      * Método que irá criar o agente.
      */
     private void criarAgente() {
-        agente = new Agente(150, new Arma("ARMA .38", 30));
+        agente = new Agente(120, new Arma("ARMA .38", 30));
     }
 
     /**
@@ -305,7 +305,7 @@ public class Jogo {
         if (!terminado) {
             return processado;
         }
-        return "Obrigado por jogar. Digite sair para finalizar";
+        return processado += "Obrigado por jogar. Digite sair para finalizar";
     }
 
     /**

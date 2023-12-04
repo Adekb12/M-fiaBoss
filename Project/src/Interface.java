@@ -27,11 +27,11 @@ public class Interface extends Jogo implements ActionListener {
 
     public Interface() {
         super();
-        planta = new ImageIcon("Project/imagens/plantaBaseMafia.jpg");
+        planta = new ImageIcon("Project/src/plantaBaseMafia.jpg");
         janela = new JFrame("Mafia Boss");
         painelCentral = new JPanel();
         painelInferior = new JPanel();
-        painelRespostas = new JTextArea(30, 100);
+        painelRespostas = new JTextArea(100, 100);
         painelComando = new JPanel();
         painelPersonagem = new JPanel();
         enviar = new JButton("Enviar resposta");
